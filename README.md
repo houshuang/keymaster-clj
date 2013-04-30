@@ -1,35 +1,32 @@
-# keys
+# Keymaster-clj
 
-FIXME: description
+Keymaster-clj is a global shortcut library for Clojure. It functions as a tiny wrapper around [jkeymaster](https://github.com/tulskiy/jkeymaster), which is its only dependency.  
 
 ## Installation
 
-Download from http://example.com/FIXME.
+For now, you have to grab it from GitHub. I'll try to learn how to put on clojars.
 
 ## Usage
 
-FIXME: explanation
+```clojure
+(require 'keymaster.core)
 
-    $ java -jar keys-0.1.0-standalone.jar [args]
+(def provider keymaster.core/provider)
+(provider "control shift 1" #(println "You pressed 1!"))
+```
 
-## Options
+You first acquire a provider with keymaster.core/provider, which initializes the library and returns a function which you can use to register keyboard shortcuts. You then call that function with the keyboard shortcut as a string, and the function callback. 
 
-FIXME: listing of options this app accepts.
+## Multiplatform
 
-## Examples
+The Java library jkeymaster is supposed to work on OSX, Linux and Windows. I've only tested this Clojure wrapper on OSX.
 
-...
+## Feedback
+This is some of the first Clojure code I have written, so any feedback is appreciated, including making the code more "idiomatic", feedback on the design of the API etc. (Initially, I returned the provider as a var, and had users call a separate keymaster.core/register with the provider as an argument -- now I use a partial, which lets me only expose one function to users. Not sure which is better.)
 
-### Bugs
-
-...
-
-### Any Other Sections
-### That You Think
-### Might be Useful
 
 ## License
 
-Copyright © 2013 FIXME
+Copyright © 2013 Stian Haklev
 
 Distributed under the Eclipse Public License, the same as Clojure.
