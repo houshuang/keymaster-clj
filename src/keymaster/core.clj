@@ -20,13 +20,13 @@
 
 (defn register
   [provider shortcut listener]
-  "Registers a shortcut on provider, which will trigger listener (with one argument)"
+  "Registers a shortcut on provider, which will trigger listener"
   (let [k (conv-keystroke shortcut)
         l (conv-listener listener)]
     (.register provider k l)))
 
 (defn make-provider []
-  "Gets and initiates a keymaster provider, which must be passed to register to register shortcuts"
+  "Gets and initiates a keymaster provider, returns partial function which can be used to register shortcuts"
   (let [provider (com.tulskiy.keymaster.common.Provider/getCurrentProvider true)]
     (.init provider)
     (partial register provider)))
