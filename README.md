@@ -1,6 +1,6 @@
 # Keymaster-clj
 
-Keymaster-clj is a global shortcut library for Clojure. It functions as a tiny wrapper around [jkeymaster](https://github.com/tulskiy/jkeymaster), which is its only dependency.  
+Keymaster-clj is a global shortcut library for Clojure. It functions as a tiny wrapper around [jkeymaster](https://github.com/tulskiy/jkeymaster), which is its only dependency.
 
 ## Installation
 
@@ -11,11 +11,11 @@ For now, you have to grab it from GitHub. I'll try to learn how to put on clojar
 ```clojure
 (require 'keymaster.core)
 
-(def provider keymaster.core/provider)
+(def provider keymaster.core/make-provider)
 (provider "control shift 1" #(println "You pressed 1!"))
 ```
 
-You first acquire a provider with keymaster.core/provider, which initializes the library and returns a function which you can use to register keyboard shortcuts. You then call that function with the keyboard shortcut as a string, and the function callback. 
+You first acquire a provider with keymaster.core/provider, which initializes the library and returns a function which you can use to register keyboard shortcuts. You then call that function with the keyboard shortcut as a string, and the function callback.
 
 ## Multiplatform
 

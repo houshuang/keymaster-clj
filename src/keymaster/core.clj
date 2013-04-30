@@ -2,8 +2,8 @@
   ;  First acquire a provider, and then register a keyboard shortcut
 
   ;  Example code:
-  ;  (let [keyprovider (keymaster.core/provider)]
-  ;    (keyprovider "control shift 1" #(println)))
+  ;  (let [provider (keymaster.core/make-provider)]
+  ;    (provider "control shift 1" #(println)))
 
 (ns keymaster.core
   (:gen-class)
@@ -18,8 +18,6 @@
    Todo: How to accept a function with or without a parameter to accept hotKey?"
    (proxy [com.tulskiy.keymaster.common.HotKeyListener] [] (onHotKey [hotKey] (f))))
 
-(declare provider)
-
 (defn register
   [provider shortcut listener]
   "Registers a shortcut on provider, which will trigger listener (with one argument)"
@@ -27,7 +25,7 @@
         l (conv-listener listener)]
     (.register provider k l)))
 
-(defn provider []
+(defn make-provider []
   "Gets and initiates a keymaster provider, which must be passed to register to register shortcuts"
   (let [provider (com.tulskiy.keymaster.common.Provider/getCurrentProvider true)]
     (.init provider)
