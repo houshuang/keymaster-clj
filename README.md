@@ -2,6 +2,9 @@
 
 Keymaster-clj is a global shortcut library for Clojure. It functions as a tiny wrapper around [jkeymaster](https://github.com/tulskiy/jkeymaster), which is its only dependency.
 
+## Thanks
+@raek ([Rasmus Svensson](http://raek.se/)) helped me out a ton in the #clojure IRC channel to get this working, I really appreciate it. 
+
 ## Installation
 
 For now, you have to grab it from GitHub. I'll try to learn how to put on clojars.
