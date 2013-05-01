@@ -5,5 +5,4 @@
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.5.1"]
                  [com.github.tulskiy/jkeymaster "1.1"]
-                 [jna "3.2.7"]]
-  :main keymaster.core)
+                 [jna "3.2.7"]])

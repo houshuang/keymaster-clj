@@ -31,7 +31,3 @@
   (let [provider (com.tulskiy.keymaster.common.Provider/getCurrentProvider true)]
     (.init provider)
     (partial register provider)))
-
-(defn -main []
-  (let [register (make-provider)]
-    (register "control space" #(println "lulz") )))
