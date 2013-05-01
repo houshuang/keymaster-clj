@@ -3,7 +3,9 @@
 
   ;  Example code:
   ;  (let [provider (keymaster.core/make-provider)]
-  ;    (provider "control shift 1" #(println)))
+  ;    (keymaster.core/register provider "control shift 1" #(println)))
+  ;  When you are done, use (keymaster.core/stop provider) to reset keyboard shortcuts.
+  ;  Use keyboard.core/make-provider to create a new provider to register keyboard shortcuts after this.
 
 (ns keymaster.core
   (:gen-class)
@@ -25,8 +27,14 @@
         keystroke-listener (conv-listener listener)]
     (.register provider keystroke keystroke-listener)))
 
+(defn stop [provider]
+  "Resets keyboard shortcuts and stops a provider. Call make-provider again to register new shortcuts"
+  (-> provider
+      .reset
+      .stop))
+
 (defn make-provider []
   "Gets and initiates a keymaster provider, returns partial function which can be used to register shortcuts"
   (let [provider (com.tulskiy.keymaster.common.Provider/getCurrentProvider true)]
     (.init provider)
-    (partial register provider)))
+    provider))
