@@ -8,28 +8,23 @@
 (ns keymaster.core
   (:gen-class)
   (:use (com.tulskiy.keymaster.common)
-        [keymaster.utilites :only [arg-count]]))
+        [keymaster.utilites :only [call-with-correct-args]]))
 
-(defn- conv-keystroke [x]
+(defn- conv-keystroke [keystroke-string]
   "Takes keystroke in the form \"control shift 1\" and returns a Keystroke class"
-  (javax.swing.KeyStroke/getKeyStroke x))
+  (javax.swing.KeyStroke/getKeyStroke keystroke-string))
 
 (defn- conv-listener [function]
-  "Takes a function with one argument, which will get passed the keycode, and creates a listener
-   Todo: How to accept a function with or without a parameter to accept hotKey?"
+  "Takes a function with one argument, which will get passed the keycode, and creates a listener"
    (proxy [com.tulskiy.keymaster.common.HotKeyListener] []
-    (onHotKey [hotKey]
-      (if (= 1 (arg-count function))
-        (function hotKey)
-      ;else
-        (function)))))
+    (onHotKey [hotKey] (call-with-correct-args function hotKey))))
 
 (defn register
   [provider shortcut listener]
   "Registers a shortcut on provider, which will trigger listener"
-  (let [k (conv-keystroke shortcut)
-        l (conv-listener listener)]
-    (.register provider k l)))
+  (let [keystroke (conv-keystroke shortcut)
+        listener (conv-listener listener)]
+    (.register provider keystroke listener)))
 
 (defn make-provider []
   "Gets and initiates a keymaster provider, returns partial function which can be used to register shortcuts"
