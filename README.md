@@ -22,7 +22,7 @@ The Java library jkeymaster is supposed to work on OSX, Linux and Windows. I've 
 ## Thanks
 @raek ([Rasmus Svensson](http://raek.se/)) helped me out a ton in the #clojure IRC channel to get this working, I really appreciate it.
 
-Michael Marsh encouraged me with the first pull request, making the code neater, and making it work on Ubuntu.
+[Michael Marsh](https://github.com/micmarsh) encouraged me with the first pull request, making the code neater, and making it work on Ubuntu.
 
 ## Contributors
 
