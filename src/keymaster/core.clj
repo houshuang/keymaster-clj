@@ -8,7 +8,7 @@
 (ns keymaster.core
   (:gen-class)
   (:use (com.tulskiy.keymaster.common)
-        [keymaster.utilites :only [call-with-correct-args]]))
+        [keymaster.utilities :only [call-with-correct-args]]))
 
 (defn- conv-keystroke [keystroke-string]
   "Takes keystroke in the form \"control shift 1\" and returns a Keystroke class"
@@ -23,11 +23,15 @@
   [provider shortcut listener]
   "Registers a shortcut on provider, which will trigger listener"
   (let [keystroke (conv-keystroke shortcut)
-        listener (conv-listener listener)]
-    (.register provider keystroke listener)))
+        keystroke-listener (conv-listener listener)]
+    (.register provider keystroke keystroke-listener)))
 
 (defn make-provider []
   "Gets and initiates a keymaster provider, returns partial function which can be used to register shortcuts"
   (let [provider (com.tulskiy.keymaster.common.Provider/getCurrentProvider true)]
     (.init provider)
     (partial register provider)))
+
+(defn -main []
+  (let [register (make-provider)]
+    (register "control space" #(println "lulz") )))
