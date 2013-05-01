@@ -2,9 +2,6 @@
 
 Keymaster-clj is a global shortcut library for Clojure. It functions as a tiny wrapper around [jkeymaster](https://github.com/tulskiy/jkeymaster), which is its only dependency.
 
-## Thanks
-@raek ([Rasmus Svensson](http://raek.se/)) helped me out a ton in the #clojure IRC channel to get this working, I really appreciate it.
-
 ## Installation
 
 Add `[org.clojars.houshuang/keymaster-clj "0.1.0"]` to your dependencies in `project.clj`. 
@@ -21,6 +18,11 @@ You first acquire a provider with `keymaster.core/provider`, which initializes t
 ## Multiplatform
 
 The Java library jkeymaster is supposed to work on OSX, Linux and Windows. I've only tested this Clojure wrapper on OSX, and I believe Michael Marsh has tested it on Ubuntu.
+
+## Thanks
+@raek ([Rasmus Svensson](http://raek.se/)) helped me out a ton in the #clojure IRC channel to get this working, I really appreciate it.
+
+Michael Marsh encouraged me with the first pull request, making the code neater, and making it work on Ubuntu.
 
 ## Contributors
 
