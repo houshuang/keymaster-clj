@@ -7,16 +7,22 @@
 
 (ns keymaster.core
   (:gen-class)
-  (:use (com.tulskiy.keymaster.common)))
+  (:use (com.tulskiy.keymaster.common)
+        [keymaster.utilites :only [arg-count]]))
 
 (defn- conv-keystroke [x]
   "Takes keystroke in the form \"control shift 1\" and returns a Keystroke class"
   (javax.swing.KeyStroke/getKeyStroke x))
 
-(defn- conv-listener [f]
+(defn- conv-listener [function]
   "Takes a function with one argument, which will get passed the keycode, and creates a listener
    Todo: How to accept a function with or without a parameter to accept hotKey?"
-   (proxy [com.tulskiy.keymaster.common.HotKeyListener] [] (onHotKey [hotKey] (f))))
+   (proxy [com.tulskiy.keymaster.common.HotKeyListener] []
+    (onHotKey [hotKey]
+      (if (= 1 (arg-count function))
+        (function hotKey)
+      ;else
+        (function)))))
 
 (defn register
   [provider shortcut listener]
