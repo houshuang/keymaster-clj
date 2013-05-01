@@ -16,13 +16,12 @@
 
 (defn- conv-listener [function]
   "Takes a function with one argument, which will get passed the keycode, and creates a listener"
-   (proxy [com.tulskiy.keymaster.common.HotKeyListener] []
+  (proxy [com.tulskiy.keymaster.common.HotKeyListener] []
     (onHotKey [hotKey] (call-with-correct-args function hotKey))))
 
-(defn register
-  [provider shortcut listener]
+(defn register [provider shortcut listener]
   "Registers a shortcut on provider, which will trigger listener"
-  (let [keystroke (conv-keystroke shortcut)
+  (let [keystroke          (conv-keystroke shortcut)
         keystroke-listener (conv-listener listener)]
     (.register provider keystroke keystroke-listener)))
 
