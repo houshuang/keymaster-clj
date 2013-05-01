@@ -10,7 +10,4 @@
   "Call the given function on all given args that it can accept"
   (let [amount-accepted (arg-count function)
         accepted-args (take amount-accepted args)]
-    (if-not (= 0 amount-accepted)
-      (apply function accepted-args)
-    ;else
-      (function))))
+    (apply function accepted-args)))
