@@ -29,12 +29,11 @@
 
 (defn stop [provider]
   "Resets keyboard shortcuts and stops a provider. Call make-provider again to register new shortcuts"
-  (-> provider
-      .reset
-      .stop))
+  (do (.reset provider)
+      (.stop provider)))
 
 (defn make-provider []
   "Gets and initiates a keymaster provider, returns partial function which can be used to register shortcuts"
   (let [provider (com.tulskiy.keymaster.common.Provider/getCurrentProvider true)]
-    (.init provider)
     provider))
+

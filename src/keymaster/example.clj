@@ -7,7 +7,7 @@
 
 (defn- main []
   (let [prov (km/make-provider)]
-    (println prov)
     (km/register prov "control shift 1" #(km/stop prov))
     (km/register prov "control shift 2" #(println "Hello"))
-    (loop []  (Thread/sleep 1000)  (println "hello") (recur))))
+    (loop [] (Thread/sleep 1000) (println "hello") (recur))))
+
